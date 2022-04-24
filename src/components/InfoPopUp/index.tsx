@@ -12,31 +12,28 @@ export function InfoPopUp({ onClose }: Props) {
   return (
     <Styled.Container>
       <Styled.PopUp>
-        <h1>Cześć! 👋</h1>
+        <h1>Hello! 👋</h1>
         <Styled.Spacer />
         <Styled.Section>
           <IoMusicalNoteOutline size={70} />
           <p>
-            Słuchaj.fun to codzienna gra muzyczna stworzona na podstawie{" "}
-            <a href="https://heardle.app">Heardle</a>. Zawiera ona polskie
-            utwory z różnych gatunków oraz okresów.
+            Swara Sanchari is a daily music game based on{" "}
+            <a href="https://heardle.app">Heardle</a>. It includes Telugu works
+            from various genres and periods.
           </p>
         </Styled.Section>
         <Styled.Section>
           <IoHelpCircleOutline size={50} />
           <p>
-            Codziennie generowany jest nowy utwór, zadaniem jest odgadnięcie go
-            w jak najkrótszym czasie.
+            Every day a new track is generated and the task is to guess it as
+            soon as possible.
           </p>
         </Styled.Section>
         <Button variant="green" style={{ marginTop: 20 }} onClick={onClose}>
-          Zamknij
+          Close it
         </Button>
         <Styled.Contact>
-          Kontakt -{" "}
-          <a href="mailto:maciejsynowski@icloud.com">
-            maciejsynowski@icloud.com
-          </a>{" "}
+          Contact - <a href="mailto:achukka92@gmail.com">achukka92@gmail.com</a>{" "}
         </Styled.Contact>
       </Styled.PopUp>
     </Styled.Container>

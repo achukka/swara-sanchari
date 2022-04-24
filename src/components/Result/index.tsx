@@ -30,47 +30,46 @@ export function Result({
       60
   );
 
-  const textForTry = ["Wow!", "Świetnie", "Nieźle", "Super", "Dobrze"];
+  const textForTry = ["Wow!", "Great", "Super", "Not bad", "Okay"];
 
   if (didGuess) {
     const copyResult = React.useCallback(() => {
       navigator.clipboard.writeText(scoreToEmoji(guesses));
     }, [guesses]);
 
-    const triesConjugation = currentTry === 1 ? "próbie" : "próbach";
+    const triesConjugation = currentTry === 1 ? "attempt" : "attempts";
 
     return (
       <>
         <Styled.ResultTitle>{textForTry[currentTry - 1]}</Styled.ResultTitle>
         <Styled.SongTitle>
-          Dzisiejsza piosenka, to {todaysSolution.artist} -{" "}
-          {todaysSolution.name}
+          Today&apos;s song is {todaysSolution.artist} - {todaysSolution.name}
         </Styled.SongTitle>
         <Styled.Tries>
-          Udało Ci się zgadnąć w {currentTry} {triesConjugation}
+          You guessed in {currentTry} {triesConjugation}
         </Styled.Tries>
         <YouTube id={todaysSolution.youtubeId} />
         <Button onClick={copyResult} variant="green">
-          Skopiuj wynik
+          Copy
         </Button>
         <Styled.TimeToNext>
-          Pamiętaj, by wrócić jutro - następny Słuchaj.fun za: {hoursToNextDay}{" "}
-          godzin!
+          Remember to come back tomorrow - the next song in {hoursToNextDay}{" "}
+          hours
         </Styled.TimeToNext>
       </>
     );
   } else {
     return (
       <>
-        <Styled.ResultTitle>Niestety, nie udało się...</Styled.ResultTitle>
+        <Styled.ResultTitle>
+          Unfortunately, it was not possible ...
+        </Styled.ResultTitle>
         <Styled.SongTitle>
-          Dzisiejsza piosenka, to {todaysSolution.artist} -{" "}
-          {todaysSolution.name}
+          Today&apos;s song is {todaysSolution.artist} - {todaysSolution.name}
         </Styled.SongTitle>
         <YouTube id={todaysSolution.youtubeId} />
         <Styled.TimeToNext>
-          Spróbuj ponownie jutro - następny Słuchaj.fun za: {hoursToNextDay}{" "}
-          godzin!
+          Please try again tomorrow - next song in {hoursToNextDay} hours
         </Styled.TimeToNext>
       </>
     );
