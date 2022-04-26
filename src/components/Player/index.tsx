@@ -9,13 +9,18 @@ import * as Styled from "./index.styled";
 
 interface Props {
   id: string;
+  start: number;
   currentTry: number;
 }
 
-export function Player({ id, currentTry }: Props) {
+export function Player({ id, start, currentTry }: Props) {
   const opts = {
     width: "0",
     height: "0",
+    playerVars: {
+      start: start,
+      end: start + 16,
+    },
   };
 
   // react-youtube doesn't export types for this
@@ -26,7 +31,7 @@ export function Player({ id, currentTry }: Props) {
 
   const [play, setPlay] = React.useState<boolean>(false);
 
-  const [currentTime, setCurrentTime] = React.useState<number>(0);
+  const [currentTime, setCurrentTime] = React.useState<number>(start);
 
   const [isReady, setIsReady] = React.useState<boolean>(false);
 
@@ -42,9 +47,9 @@ export function Player({ id, currentTry }: Props) {
 
   React.useEffect(() => {
     if (play) {
-      if (currentTime * 1000 >= currentPlayTime) {
+      if ((currentTime - start) * 1000 >= currentPlayTime) {
         playerRef.current?.internalPlayer.pauseVideo();
-        playerRef.current?.internalPlayer.seekTo(0);
+        playerRef.current?.internalPlayer.seekTo(start);
         setPlay(false);
       }
     }
@@ -70,13 +75,17 @@ export function Player({ id, currentTry }: Props) {
       {isReady ? (
         <>
           <Styled.ProgressBackground>
-            {currentTime !== 0 && <Styled.Progress value={currentTime} />}
-            {playTimes.map((playTime) => (
-              <Styled.Separator
-                style={{ left: `${(playTime / 16000) * 100}%` }}
-                key={playTime}
-              />
-            ))}
+            {play && currentTime >= start && (
+              <Styled.Progress value={currentTime - start} />
+            )}
+            {playTimes.map((playTime) => {
+              return (
+                <Styled.Separator
+                  style={{ left: `${(playTime / 16000) * 100}%` }}
+                  key={playTime}
+                />
+              );
+            })}
           </Styled.ProgressBackground>
           <Styled.TimeStamps>
             <Styled.TimeStamp>1s</Styled.TimeStamp>

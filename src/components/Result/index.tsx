@@ -2,7 +2,11 @@ import React from "react";
 
 import { Song } from "../../types/song";
 import { GuessType } from "../../types/guess";
-import { scoreToEmoji } from "../../helpers";
+import {
+  DEFAULT_SONG_DURATION,
+  DEFAULT_SONG_START,
+  scoreToEmoji,
+} from "../../helpers";
 
 import { Button } from "../Button";
 import { YouTube } from "../YouTube";
@@ -48,7 +52,11 @@ export function Result({
         <Styled.Tries>
           You guessed in {currentTry} {triesConjugation}
         </Styled.Tries>
-        <YouTube id={todaysSolution.youtubeId} />
+        <YouTube
+          id={todaysSolution.youtubeId}
+          start={todaysSolution.start ?? DEFAULT_SONG_START}
+          duration={todaysSolution.duration ?? DEFAULT_SONG_START}
+        />
         <Button onClick={copyResult} variant="green">
           Copy
         </Button>
@@ -67,7 +75,11 @@ export function Result({
         <Styled.SongTitle>
           Today&apos;s song is {todaysSolution.artist} - {todaysSolution.name}
         </Styled.SongTitle>
-        <YouTube id={todaysSolution.youtubeId} />
+        <YouTube
+          id={todaysSolution.youtubeId}
+          start={todaysSolution.start ?? DEFAULT_SONG_START}
+          duration={todaysSolution.duration ?? DEFAULT_SONG_DURATION}
+        />
         <Styled.TimeToNext>
           Please try again tomorrow - next song in {hoursToNextDay} hours
         </Styled.TimeToNext>

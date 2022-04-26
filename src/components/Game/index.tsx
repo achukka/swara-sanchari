@@ -47,7 +47,11 @@ export function Game({
           active={index === currentTry}
         />
       ))}
-      <Player id={todaysSolution.youtubeId} currentTry={currentTry} />
+      <Player
+        id={todaysSolution.youtubeId}
+        start={todaysSolution.start ?? 0}
+        currentTry={currentTry}
+      />
       <Search currentTry={currentTry} setSelectedSong={setSelectedSong} />
 
       <Styled.Buttons>
